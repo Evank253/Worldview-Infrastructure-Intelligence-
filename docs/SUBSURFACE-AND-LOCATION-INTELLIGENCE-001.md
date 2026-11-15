@@ -61,3 +61,13 @@ To create a real underground X-ray / GPR experience:
 The location popup is currently local-data driven. It does not yet query city, county, state, utility, engineering, permit, or inspection repositories. Production source connectors must have source-specific lawful access, rate limits, authentication, terms, retention, update timestamps, and evidence manifests. Each acquired record must retain its original source URL or file reference, jurisdiction, record number, issue/revision date, acquisition time, digest, license/access classification, and verification status.
 
 CLONE BEFORE COMPOSITION. Preserve source files and source-system identifiers. Derived metadata, extracted text, and reconstructed geometry remain separate linked artifacts.
+## Additional initial route-path interaction
+
+The browser workspace also provides a manual path drawing workflow:
+- Select **UNDERGROUND X-RAY** or **GPR VIEW**.
+- Select **DRAW PATH**, then click the map to add geographic vertices.
+- Select **SAVE PATH** and provide a route name and source evidence class.
+- The path is persisted locally, rendered as a line in the subsurface visualization, included in workspace export, and registered in the evidence ledger.
+- Draft geometry is visually distinct from saved geometry.
+
+This is a user-authored geographic polyline, not an automatically detected underground route. Its selected source class is a user assertion, not independent verification. The current model does not yet record per-vertex depth, vertical datum, positional uncertainty, cable/duct identity, equipment metadata, source-document linkage, or route-segment verification. Do not use this drawing workflow as excavation guidance or as proof of physical continuity.
