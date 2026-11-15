@@ -32,5 +32,11 @@
 | WRI-001 | Workforce Recognition & Work Quality Intelligence | Evidence-based recognition and fair accountability | PROPOSED |
 | PIP-001 | Professional Infrastructure Passport | Worker-controlled verified skills, projects and accomplishments | PROPOSED |
 
+## Emergency intelligence systems
+
+| EOI-001 | Emergency Outage Intelligence | Shared incident record, outage coordination, multi-incident monitoring, severity/impact assessment, cross-sector emergency intelligence | PROPOSED — SPECIFICATION RECORDED; NOT IMPLEMENTED |
+| EDI-001 | Emergency Dispatch Intelligence | Emergency assignment intake, crew/equipment readiness, reassignment, emergency packet generation, response/restoration tracking | PROPOSED — SPECIFICATION RECORDED; NOT IMPLEMENTED |
+| EOVI-001 | Emergency Outage Visualization Intelligence | Incident-first map activation, progressive infrastructure/document loading, evidence-backed network visualization | PROPOSED — SPECIFICATION RECORDED; NOT IMPLEMENTED |
+
 ## Cross-cutting domain coverage
 Telecom (fiber/coax/copper, aerial/underground, splicing, pressurization, wireless, data centers, submarine cables); water; sewer; stormwater; electric; gas; petroleum; transportation; public works; marine; district utilities; fire suppression; private/residential systems; industrial and emerging infrastructure (solar, storage, EV charging). Coverage is an investigation target, not a claim that data is already populated.
