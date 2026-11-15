@@ -15,7 +15,7 @@ Open `http://localhost:4173`.
 ## Working capabilities
 
 - Interactive slippy-map viewport with pan, zoom, coordinate navigation, and map-click asset placement.
-- User-entered infrastructure asset registry with stable local IDs and explicit evidence states.
+- User-entered infrastructure asset registry with stable local IDs and explicit evidence states.\n- Evidence-derived underground connection display from explicit asset/work-record cross-references; no manual route drawing.\n- Subsurface depth metadata with explicit depth evidence classes and vertical datum/units.
 - Browser-local document storage using IndexedDB; SHA-256 digest computed at intake; original file can be downloaded again.
 - Evidence ledger recording asset and document intake events.
 - Work / field / inspection / deficiency / correction records with explicit dispositions.
@@ -28,7 +28,7 @@ Open `http://localhost:4173`.
 - OpenStreetMap raster tiles are fetched from the hosted OSM tile service only for the visible viewport. This external service cannot be cloned into this repository. Visible attribution is provided. OSM tile availability is best-effort and subject to its usage policy; production/commercial use requires a suitable tile provider or self-hosted tile infrastructure. The provider is configurable in `src/app.js`.
 - Browser-native APIs (DOM, IndexedDB, WebCrypto, File, Blob, localStorage) are runtime platform capabilities, not vendored dependencies.
 - User-created records and document blobs remain in the current browser profile. There is no backend, cloud synchronization, authentication, access control, multi-user workflow, backup service, or server-side encryption yet.
-- A coordinate is not proof of physical asset location. A field observation is not proof of owner, depth, material, occupancy, or connectivity.
+- A coordinate is not proof of physical asset location. A field observation is not proof of owner, depth, material, occupancy, or connectivity.\n- Underground connection lines are derived only from explicit recorded asset/work references and remain unverified; proximity and shared route labels alone never create connections. No GPR scan, automatic blueprint extraction, or physical continuity verification is performed.
 - A user-uploaded document is preserved and hashed; its contents are not yet OCR-extracted, parsed, georeferenced, or independently verified.
 - Import/export is user-controlled and should be treated as sensitive. Do not upload restricted critical-infrastructure documents to an unapproved service.
 
