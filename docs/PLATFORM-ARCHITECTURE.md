@@ -35,5 +35,34 @@ A map symbol is a representation, not proof. Every displayed geometry must expos
 ## Data separation
 Original documents and acquired source artifacts are immutable. Extracted text, interpreted attributes, normalized records, reconstructed drawings, derived geometry, and user annotations are separate artifacts linked by lineage. Corrections append new events and do not silently rewrite history.
 
-## Technology direction
-A spatial relational core (PostgreSQL/PostGIS) is a candidate for authoritative structured records. A map rendering layer may use CesiumJS for globe/3D and/or MapLibre for 2D vector mapping. Object storage holds originals and derivatives. OCR/CAD/GIS processing, graph relationships, search, and monitoring are separate services. These are candidates, not final technology decisions; benchmark and threat-model before commitment.
+## Technology direction — existing engines plus professional rendering
+
+**Architecture correction:** WII is not starting its geospatial engine from scratch. Existing Worldview/KCN repositories already contain geospatial and globe-engine work. The task is to audit, preserve, complete, qualify, and integrate those engines, then extend their visual capabilities with professional graphics and a game-engine rendering environment. Do not replace existing engines with a newly proposed stack merely because a library is familiar.
+
+### Existing engine lineage to audit and reuse
+- `Evank253/kcn-worldview-command-center`, branch `Python-3`, source commit `2261e9344a079d2f6d622d944c5b0a431bac1aa1`: contains existing Cesium/globe implementation files including `app/src/cesiumGlobe.ts`, `app/src/globe.ts`, `app/src/layerRegistry.ts`, `app/src/cesium-demo.ts`, plus tests, build configuration and a Cesium demo. WII currently has only a partial preserved source snapshot; the original source repository remains untouched.
+- `Evank253/world-view`, branch `Products`, inspected tree commit `31d951a263c57b6d5ad2fc1c702a8a6ab85af307`: contains earlier map component, app and supporting Worldview modules. Audit for unique reusable functionality; do not assume it is a production geospatial engine.
+- `Evank253/worldviewcommandcenteroftechnologies`, branch `Products`, inspected tree commit `50750ddc2a5efbfc9df46f56feb32c58e3e8bdc2`, and `Evank253/worldview-command-center-os-pro-version-`, branch `Products`, inspected tree commit `48003eb381cac27ff672fdf3bfc611d9c04a955f`: preserve and inspect as related Worldview lineage. Their tree contents alone do not establish production readiness or feature completeness.
+- Other discovered repositories with empty or minimal trees are not to be treated as completed engines.
+
+### Rendering and graphics architecture
+Keep the authoritative geospatial/infrastructure model independent of any renderer. Use adapters so multiple visual clients can consume the same versioned, evidence-linked geometry and metadata:
+1. **Existing Worldview geospatial engine(s):** primary location, layer, coordinate, asset, route, temporal and geospatial interaction foundation. Inventory existing code and tests before extending.
+2. **Professional graphics/rendering toolchain:** high-quality material and texture authoring, physically based materials, terrain/mesh processing, photogrammetry/point-cloud preparation, lighting, procedural vegetation, model optimization, level-of-detail generation, and export pipelines. Every asset retains source, license, version, hash, coordinate reference, scale and lineage.
+3. **Game-engine visualization client:** evaluate Unreal Engine as the high-fidelity visualization/simulation environment, not as the authoritative infrastructure database or replacement for the existing map engine. It can provide physically based rendering, advanced lighting/shadows, foliage, collision/physics, interactive scene controls, simulation and immersive visualization. Maintain a separate lightweight web experience for normal browser access.
+4. **Geospatial bridge:** evaluate Cesium for Unreal as a bridge between a WGS84 globe/3D Tiles geospatial content and Unreal's rendering/runtime. The official Cesium documentation describes this integration, including real-world 3D Tiles, photogrammetry, terrain, imagery, buildings and Unreal interaction features. This is a candidate integration path, not yet integrated into WII.
+5. **Interchange contracts:** define versioned interfaces for WGS84/ECEF/local engineering coordinate frames, vertical datum, units, georeferencing transforms, GeoJSON, 3D Tiles, glTF/glb and source-linked feature metadata. Never lose asset IDs, evidence state, precision, uncertainty, temporal version or provenance during export/import.
+
+### Rendering truth and fidelity
+Higher visual fidelity must never be confused with higher evidentiary confidence. Photorealistic terrain, generated buildings, simulated poles, reconstructed cable paths and procedural trees must carry explicit provenance and classification. Synthetic or illustrative objects must be visibly marked. A renderer may improve appearance, navigation, inspection and simulation; it cannot independently prove asset ownership, underground location, cable continuity, clearance compliance or as-built condition.
+
+### Clone-before-composition integration sequence
+1. Preserve each source repository/ref/commit and obtain complete source archives, including binary assets and licenses where available.
+2. Create isolated WII-owned clones or working copies; record tree manifests, blob hashes, licenses, dependencies, build instructions and SBOM. Never modify upstream originals.
+3. Audit existing geospatial engines and rendering capabilities; identify duplicated or conflicting components before selecting the integration boundary.
+4. Benchmark game-engine candidates against WII requirements: geospatial precision, large-world streaming, visual quality, vegetation/terrain, performance, platform support, licensing, accessibility, offline/private deployment and maintainability.
+5. Prototype the geospatial bridge with a small, synthetic, clearly labeled test scene before connecting real sensitive infrastructure data.
+6. Verify coordinate accuracy, scale, vertical datums, feature metadata preservation, evidence overlays, performance and source attribution.
+7. Keep web and high-fidelity rendering clients independently buildable and testable. Human authority and evidence services remain outside renderer control.
+
+**Current status:** existing Worldview geospatial source has been identified and partially preserved, but complete clone intake and integration verification are still open. The Unreal/Cesium bridge and professional graphics pipeline are architectural candidates; they have not yet been installed, cloned, integrated or tested in WII.
