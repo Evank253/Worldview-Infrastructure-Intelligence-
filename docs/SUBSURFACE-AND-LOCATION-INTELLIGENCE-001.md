@@ -61,13 +61,20 @@ To create a real underground X-ray / GPR experience:
 The location popup is currently local-data driven. It does not yet query city, county, state, utility, engineering, permit, or inspection repositories. Production source connectors must have source-specific lawful access, rate limits, authentication, terms, retention, update timestamps, and evidence manifests. Each acquired record must retain its original source URL or file reference, jurisdiction, record number, issue/revision date, acquisition time, digest, license/access classification, and verification status.
 
 CLONE BEFORE COMPOSITION. Preserve source files and source-system identifiers. Derived metadata, extracted text, and reconstructed geometry remain separate linked artifacts.
-## Additional initial route-path interaction
+## Evidence-derived network reconstruction (manual route drawing removed)
 
-The browser workspace also provides a manual path drawing workflow:
-- Select **UNDERGROUND X-RAY** or **GPR VIEW**.
-- Select **DRAW PATH**, then click the map to add geographic vertices.
-- Select **SAVE PATH** and provide a route name and source evidence class.
-- The path is persisted locally, rendered as a line in the subsurface visualization, included in workspace export, and registered in the evidence ledger.
-- Draft geometry is visually distinct from saved geometry.
+The user-facing requirement is that underground paths must be reconstructed from evidence and prior logged, located, or investigated work—not manually sketched by the operator. The manual draw/save route controls have therefore been removed from the application.
 
-This is a user-authored geographic polyline, not an automatically detected underground route. Its selected source class is a user assertion, not independent verification. The current model does not yet record per-vertex depth, vertical datum, positional uncertainty, cable/duct identity, equipment metadata, source-document linkage, or route-segment verification. Do not use this drawing workflow as excavation guidance or as proof of physical continuity.
+The current initial graph builder derives candidate connections only from explicit asset-to-asset IDs recorded in asset records or work/inspection records. It expands location context through those recorded links and renders the resulting relationships in underground modes. The visual connection is dashed and must remain labeled as recorded/unverified; it is not proof of physical continuity.
+
+Asset and work intake now support:
+- Explicitly referenced connected asset IDs.
+- Route/network identifiers.
+- Cable/duct/conduit identifiers.
+- Depth value, depth evidence class and datum/units.
+- Work-record linked asset IDs.
+
+The graph does **not** infer a physical connection merely because two objects are nearby or share a route label. Unknown IDs, missing links, and gaps remain unresolved. A work log that names multiple assets is not by itself a continuity proof unless it explicitly documents the relationship.
+
+This is only the first evidence-driven graph stage. Existing legacy records may lack these fields, and document contents are not yet OCR/CAD/GIS-extracted. Automated blueprint interpretation, historical record mining, source-repository ingestion, field-note extraction, GPR/LiDAR processing, route geometry reconstruction and segment-by-segment confidence scoring remain outstanding. Until those are implemented, the map cannot claim to automatically recover every previously investigated route.
+
